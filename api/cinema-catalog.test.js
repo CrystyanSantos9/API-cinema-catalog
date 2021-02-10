@@ -60,6 +60,18 @@ function runTests() {
                 })
         })
 
+        test('GET /cities/:city/cinemas', (t) => {
+            supertest(app)
+                .get('/cities/' + cityId + '/cinemas')
+                .expect('Content-Type', /json/)
+                .expect(200)
+                .end((err, res) =>{
+                    t.error(err, 'No errors')
+                    t.assert(res.body, "Cinemas By City Id returned")
+                    t.end()  
+                })
+        })
+
         test('GET /cinemas/:cinema/movies', (t) => {
             supertest(app)
                 .get('/cinemas/' + cinemaId + "/movies")
@@ -68,6 +80,18 @@ function runTests() {
                 .end((err, res) => {
                     t.error(err, 'No errors')
                     t.assert(res.body, "Movies By Cinema Id returned")
+                    t.end()
+                })
+        })
+
+        test('GET /cinemas/:cinema/movies/:movie', (t) => {
+            supertest(app)
+                .get('/cinemas/' + cinemaId + "/movies/"+movieId)
+                .expect('Content-Type', /json/)
+                .expect(200)
+                .end((err, res) => {
+                    t.error(err, 'No errors')
+                    t.assert(res.body, "Movies Sessions By Cinema Id returned")
                     t.end()
                 })
         })
