@@ -7,7 +7,7 @@ module.exports = (app, repository) => {
     })
 
     app.get('/cities/:city/movies', (req, res, next) => {
-        repository.getMoviesByCinemaId(req.params.city, (err, movies) => {
+        repository.getMoviesByCityId(req.params.city, (err, movies) => {
             if (err) return next(err);
             res.json(movies);
         })
