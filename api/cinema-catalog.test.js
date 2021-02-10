@@ -46,19 +46,31 @@ function runTests() {
         })
 
 
-        // test('GET /cities/:city/movies/:movie', (t) => {
-        //     supertest(app)
-        //         .get("/cities/"+cityId+"/movies/"+movieId)
-        //         .expect('Content-type', /json/)
-        //         .expect(200)
-        //         .end((err, res) => {
-        //             if (res.body && res.body.length > 0) cinemaId = res.body[0].idCinema;
+        test('GET /cities/:city/movies/:movie', (t) => {
+            supertest(app)
+                .get("/cities/"+cityId+"/movies/"+movieId)
+                .expect('Content-type', /json/)
+                .expect(200)
+                .end((err, res) => {
+                    if (res.body && res.body.length > 0) cinemaId = res.body[0].idCinema;
 
-        //             t.error(err, 'No erros');
-        //             t.assert(res.body, "Movies By Cinemas returned")
-        //             t.end()
-        //         })
-        // })
+                    t.error(err, 'No erros');
+                    t.assert(res.body, "Movies By Cinemas returned")
+                    t.end()
+                })
+        })
+
+        test('GET /cinemas/:cinema/movies', (t) => {
+            supertest(app)
+                .get('/cinemas/' + cinemaId + "/movies")
+                .expect('Content-Type', /json/)
+                .expect(200)
+                .end((err, res) => {
+                    t.error(err, 'No errors')
+                    t.assert(res.body, "Movies By Cinema Id returned")
+                    t.end()
+                })
+        })
 
 
 
